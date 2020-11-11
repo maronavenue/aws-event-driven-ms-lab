@@ -1,0 +1,625 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree"
+      },
+      "Lab3-OrchestratingMicroservices": {
+        "id": "Lab3-OrchestratingMicroservices",
+        "path": "Lab3-OrchestratingMicroservices",
+        "children": {
+          "lab3-om-role": {
+            "id": "lab3-om-role",
+            "path": "Lab3-OrchestratingMicroservices/lab3-om-role",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab3-OrchestratingMicroservices"
+                      }
+                    ]
+                  }
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-role/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-role/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "logs:DescribeLogStreams"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": [
+                                "xray:PutTraceSegments",
+                                "xray:PutTelemetryRecords"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "lab3omroleDefaultPolicy6EAAE011",
+                        "roles": [
+                          {
+                            "Ref": "lab3omrole6B9CA295"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab3-om-approve-reject": {
+            "id": "lab3-om-approve-reject",
+            "path": "Lab3-OrchestratingMicroservices/lab3-om-approve-reject",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-approve-reject/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-approve-reject/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-approve-reject/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-approve-reject/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3Bucket569AD935"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3VersionKey3CEE4058"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3VersionKey3CEE4058"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab3omrole6B9CA295",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab3-OrchestratingMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "Lab3-OrchestratingMicroservices/AssetParameters",
+            "children": {
+              "25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c": {
+                "id": "25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c",
+                "path": "Lab3-OrchestratingMicroservices/AssetParameters/25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c/ArtifactHash"
+                  }
+                }
+              },
+              "9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e": {
+                "id": "9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e",
+                "path": "Lab3-OrchestratingMicroservices/AssetParameters/9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e/ArtifactHash"
+                  }
+                }
+              },
+              "96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8": {
+                "id": "96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8",
+                "path": "Lab3-OrchestratingMicroservices/AssetParameters/96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab3-OrchestratingMicroservices/AssetParameters/96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8/ArtifactHash"
+                  }
+                }
+              }
+            }
+          },
+          "lab3-om-verify-identity": {
+            "id": "lab3-om-verify-identity",
+            "path": "Lab3-OrchestratingMicroservices/lab3-om-verify-identity",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-verify-identity/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-verify-identity/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-verify-identity/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-verify-identity/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3Bucket23D58BC4"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3VersionKey91944D80"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3VersionKey91944D80"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab3omrole6B9CA295",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab3-OrchestratingMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab3-om-check-address": {
+            "id": "lab3-om-check-address",
+            "path": "Lab3-OrchestratingMicroservices/lab3-om-check-address",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-check-address/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-check-address/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-om-check-address/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab3-OrchestratingMicroservices/lab3-om-check-address/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3BucketF29BD64D"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3VersionKey24940E5F"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3VersionKey24940E5F"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab3omrole6B9CA295",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab3-OrchestratingMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Verify Identity Document": {
+            "id": "Verify Identity Document",
+            "path": "Lab3-OrchestratingMicroservices/Verify Identity Document"
+          },
+          "Check Address": {
+            "id": "Check Address",
+            "path": "Lab3-OrchestratingMicroservices/Check Address"
+          },
+          "Wait for Review": {
+            "id": "Wait for Review",
+            "path": "Lab3-OrchestratingMicroservices/Wait for Review"
+          },
+          "Approve Application": {
+            "id": "Approve Application",
+            "path": "Lab3-OrchestratingMicroservices/Approve Application"
+          },
+          "Reject Application": {
+            "id": "Reject Application",
+            "path": "Lab3-OrchestratingMicroservices/Reject Application"
+          },
+          "Verification": {
+            "id": "Verification",
+            "path": "Lab3-OrchestratingMicroservices/Verification"
+          },
+          "Human review required?": {
+            "id": "Human review required?",
+            "path": "Lab3-OrchestratingMicroservices/Human review required?"
+          },
+          "Review approved?": {
+            "id": "Review approved?",
+            "path": "Lab3-OrchestratingMicroservices/Review approved?"
+          },
+          "lab3-statemachine": {
+            "id": "lab3-statemachine",
+            "path": "Lab3-OrchestratingMicroservices/lab3-statemachine",
+            "children": {
+              "Role": {
+                "id": "Role",
+                "path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Role",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Role/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "states.",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ".amazonaws.com"
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "Lab3-OrchestratingMicroservices"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Role/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Role/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "lambda:InvokeFunction",
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "lab3omapprovereject70B30AEA",
+                                      "Arn"
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "lambda:InvokeFunction",
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "lab3omverifyidentityFE2C841A",
+                                      "Arn"
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "lambda:InvokeFunction",
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "lab3omcheckaddress216B0C4A",
+                                      "Arn"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "lab3statemachineRoleDefaultPolicy0F15CD43",
+                            "roles": [
+                              {
+                                "Ref": "lab3statemachineRole5048061E"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::StepFunctions::StateMachine",
+                  "aws:cdk:cloudformation:props": {
+                    "roleArn": {
+                      "Fn::GetAtt": [
+                        "lab3statemachineRole5048061E",
+                        "Arn"
+                      ]
+                    },
+                    "definitionString": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{\"StartAt\":\"Verification\",\"States\":{\"Verification\":{\"Type\":\"Parallel\",\"Next\":\"Human review required?\",\"Branches\":[{\"StartAt\":\"Verify Identity Document\",\"States\":{\"Verify Identity Document\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+                          {
+                            "Fn::GetAtt": [
+                              "lab3omverifyidentityFE2C841A",
+                              "Arn"
+                            ]
+                          },
+                          "\",\"Payload.$\":\"$\"}}}},{\"StartAt\":\"Check Address\",\"States\":{\"Check Address\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+                          {
+                            "Fn::GetAtt": [
+                              "lab3omcheckaddress216B0C4A",
+                              "Arn"
+                            ]
+                          },
+                          "\",\"Payload.$\":\"$\"}}}}]},\"Human review required?\":{\"Type\":\"Choice\",\"Choices\":[{\"And\":[{\"Variable\":\"$[0].humanReviewRequired\",\"BooleanEquals\":false},{\"Variable\":\"$[1].humanReviewRequired\",\"BooleanEquals\":true}],\"Next\":\"Approve Application\"},{\"Or\":[{\"Variable\":\"$[0].humanReviewRequired\",\"BooleanEquals\":true},{\"Variable\":\"$[1].humanReviewRequired\",\"BooleanEquals\":false}],\"Next\":\"Wait for Review\"}]},\"Approve Application\":{\"Type\":\"Succeed\"},\"Review approved?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$.reviewApproved\",\"BooleanEquals\":true,\"Next\":\"Approve Application\"},{\"Variable\":\"$.reviewApproved\",\"BooleanEquals\":false,\"Next\":\"Reject Application\"}]},\"Wait for Review\":{\"Next\":\"Review approved?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+                          {
+                            "Ref": "AWS::Partition"
+                          },
+                          ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+                          {
+                            "Fn::GetAtt": [
+                              "lab3omapprovereject70B30AEA",
+                              "Arn"
+                            ]
+                          },
+                          "\",\"Payload.$\":\"$\"}},\"Reject Application\":{\"Type\":\"Succeed\"}},\"TimeoutSeconds\":300}"
+                        ]
+                      ]
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab3-OrchestratingMicroservices"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Lab3-OrchestratingMicroservices/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Lab3-OrchestratingMicroservices/CDKMetadata/Default"
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Lab3-OrchestratingMicroservices/CDKMetadata/Condition"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

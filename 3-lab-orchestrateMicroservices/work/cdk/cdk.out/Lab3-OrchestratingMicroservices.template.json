@@ -1,0 +1,650 @@
+{
+  "Resources": {
+    "lab3omrole6B9CA295": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Lab3-OrchestratingMicroservices"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-om-role/Resource"
+      }
+    },
+    "lab3omroleDefaultPolicy6EAAE011": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "lab3omroleDefaultPolicy6EAAE011",
+        "Roles": [
+          {
+            "Ref": "lab3omrole6B9CA295"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-om-role/DefaultPolicy/Resource"
+      }
+    },
+    "lab3omapprovereject70B30AEA": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3Bucket569AD935"
+          },
+          "S3Key": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::Select": [
+                    0,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3VersionKey3CEE4058"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Fn::Select": [
+                    1,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3VersionKey3CEE4058"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        "Handler": "app.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "lab3omrole6B9CA295",
+            "Arn"
+          ]
+        },
+        "Runtime": "python3.8",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Lab3-OrchestratingMicroservices"
+          }
+        ],
+        "Timeout": 30,
+        "TracingConfig": {
+          "Mode": "Active"
+        }
+      },
+      "DependsOn": [
+        "lab3omroleDefaultPolicy6EAAE011",
+        "lab3omrole6B9CA295"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-om-approve-reject/Resource",
+        "aws:asset:path": "asset.25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c",
+        "aws:asset:property": "Code"
+      }
+    },
+    "lab3omverifyidentityFE2C841A": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3Bucket23D58BC4"
+          },
+          "S3Key": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::Select": [
+                    0,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3VersionKey91944D80"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Fn::Select": [
+                    1,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3VersionKey91944D80"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        "Handler": "app.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "lab3omrole6B9CA295",
+            "Arn"
+          ]
+        },
+        "Runtime": "python3.8",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Lab3-OrchestratingMicroservices"
+          }
+        ],
+        "Timeout": 30,
+        "TracingConfig": {
+          "Mode": "Active"
+        }
+      },
+      "DependsOn": [
+        "lab3omroleDefaultPolicy6EAAE011",
+        "lab3omrole6B9CA295"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-om-verify-identity/Resource",
+        "aws:asset:path": "asset.9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e",
+        "aws:asset:property": "Code"
+      }
+    },
+    "lab3omcheckaddress216B0C4A": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3BucketF29BD64D"
+          },
+          "S3Key": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::Select": [
+                    0,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3VersionKey24940E5F"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Fn::Select": [
+                    1,
+                    {
+                      "Fn::Split": [
+                        "||",
+                        {
+                          "Ref": "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3VersionKey24940E5F"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        "Handler": "app.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "lab3omrole6B9CA295",
+            "Arn"
+          ]
+        },
+        "Runtime": "python3.8",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Lab3-OrchestratingMicroservices"
+          }
+        ],
+        "Timeout": 30,
+        "TracingConfig": {
+          "Mode": "Active"
+        }
+      },
+      "DependsOn": [
+        "lab3omroleDefaultPolicy6EAAE011",
+        "lab3omrole6B9CA295"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-om-check-address/Resource",
+        "aws:asset:path": "asset.96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8",
+        "aws:asset:property": "Code"
+      }
+    },
+    "lab3statemachineRole5048061E": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "states.",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ".amazonaws.com"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Lab3-OrchestratingMicroservices"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Role/Resource"
+      }
+    },
+    "lab3statemachineRoleDefaultPolicy0F15CD43": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "lab3omapprovereject70B30AEA",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "lab3omverifyidentityFE2C841A",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "lab3omcheckaddress216B0C4A",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "lab3statemachineRoleDefaultPolicy0F15CD43",
+        "Roles": [
+          {
+            "Ref": "lab3statemachineRole5048061E"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Role/DefaultPolicy/Resource"
+      }
+    },
+    "lab3statemachine7D24889D": {
+      "Type": "AWS::StepFunctions::StateMachine",
+      "Properties": {
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "lab3statemachineRole5048061E",
+            "Arn"
+          ]
+        },
+        "DefinitionString": {
+          "Fn::Join": [
+            "",
+            [
+              "{\"StartAt\":\"Verification\",\"States\":{\"Verification\":{\"Type\":\"Parallel\",\"Next\":\"Human review required?\",\"Branches\":[{\"StartAt\":\"Verify Identity Document\",\"States\":{\"Verify Identity Document\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+              {
+                "Fn::GetAtt": [
+                  "lab3omverifyidentityFE2C841A",
+                  "Arn"
+                ]
+              },
+              "\",\"Payload.$\":\"$\"}}}},{\"StartAt\":\"Check Address\",\"States\":{\"Check Address\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+              {
+                "Fn::GetAtt": [
+                  "lab3omcheckaddress216B0C4A",
+                  "Arn"
+                ]
+              },
+              "\",\"Payload.$\":\"$\"}}}}]},\"Human review required?\":{\"Type\":\"Choice\",\"Choices\":[{\"And\":[{\"Variable\":\"$[0].humanReviewRequired\",\"BooleanEquals\":false},{\"Variable\":\"$[1].humanReviewRequired\",\"BooleanEquals\":true}],\"Next\":\"Approve Application\"},{\"Or\":[{\"Variable\":\"$[0].humanReviewRequired\",\"BooleanEquals\":true},{\"Variable\":\"$[1].humanReviewRequired\",\"BooleanEquals\":false}],\"Next\":\"Wait for Review\"}]},\"Approve Application\":{\"Type\":\"Succeed\"},\"Review approved?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$.reviewApproved\",\"BooleanEquals\":true,\"Next\":\"Approve Application\"},{\"Variable\":\"$.reviewApproved\",\"BooleanEquals\":false,\"Next\":\"Reject Application\"}]},\"Wait for Review\":{\"Next\":\"Review approved?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"OutputPath\":\"$.Payload\",\"Resource\":\"arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+              {
+                "Fn::GetAtt": [
+                  "lab3omapprovereject70B30AEA",
+                  "Arn"
+                ]
+              },
+              "\",\"Payload.$\":\"$\"}},\"Reject Application\":{\"Type\":\"Succeed\"}},\"TimeoutSeconds\":300}"
+            ]
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Lab3-OrchestratingMicroservices"
+          }
+        ]
+      },
+      "DependsOn": [
+        "lab3statemachineRoleDefaultPolicy0F15CD43",
+        "lab3statemachineRole5048061E"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/lab3-statemachine/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Modules": "aws-cdk=1.72.0,@aws-cdk/assets=1.70.0,@aws-cdk/aws-apigateway=1.70.0,@aws-cdk/aws-applicationautoscaling=1.70.0,@aws-cdk/aws-autoscaling=1.70.0,@aws-cdk/aws-autoscaling-common=1.70.0,@aws-cdk/aws-autoscaling-hooktargets=1.70.0,@aws-cdk/aws-batch=1.70.0,@aws-cdk/aws-certificatemanager=1.70.0,@aws-cdk/aws-cloudformation=1.70.0,@aws-cdk/aws-cloudfront=1.70.0,@aws-cdk/aws-cloudwatch=1.70.0,@aws-cdk/aws-codebuild=1.70.0,@aws-cdk/aws-codecommit=1.70.0,@aws-cdk/aws-codeguruprofiler=1.70.0,@aws-cdk/aws-cognito=1.70.0,@aws-cdk/aws-dynamodb=1.70.0,@aws-cdk/aws-ec2=1.70.0,@aws-cdk/aws-ecr=1.70.0,@aws-cdk/aws-ecr-assets=1.70.0,@aws-cdk/aws-ecs=1.70.0,@aws-cdk/aws-efs=1.70.0,@aws-cdk/aws-elasticloadbalancing=1.70.0,@aws-cdk/aws-elasticloadbalancingv2=1.70.0,@aws-cdk/aws-events=1.70.0,@aws-cdk/aws-glue=1.70.0,@aws-cdk/aws-iam=1.70.0,@aws-cdk/aws-kms=1.70.0,@aws-cdk/aws-lambda=1.70.0,@aws-cdk/aws-logs=1.70.0,@aws-cdk/aws-route53=1.70.0,@aws-cdk/aws-route53-targets=1.70.0,@aws-cdk/aws-s3=1.70.0,@aws-cdk/aws-s3-assets=1.70.0,@aws-cdk/aws-sam=1.70.0,@aws-cdk/aws-secretsmanager=1.70.0,@aws-cdk/aws-servicediscovery=1.70.0,@aws-cdk/aws-sns=1.70.0,@aws-cdk/aws-sns-subscriptions=1.70.0,@aws-cdk/aws-sqs=1.70.0,@aws-cdk/aws-ssm=1.70.0,@aws-cdk/aws-stepfunctions=1.70.0,@aws-cdk/aws-stepfunctions-tasks=1.70.0,@aws-cdk/cloud-assembly-schema=1.70.0,@aws-cdk/core=1.70.0,@aws-cdk/custom-resources=1.70.0,@aws-cdk/cx-api=1.70.0,@aws-cdk/region-info=1.70.0,jsii-runtime=Python/3.7.9"
+      },
+      "Metadata": {
+        "aws:cdk:path": "Lab3-OrchestratingMicroservices/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Parameters": {
+    "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3Bucket569AD935": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c\""
+    },
+    "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cS3VersionKey3CEE4058": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c\""
+    },
+    "AssetParameters25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2cArtifactHashDF4DD0FD": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"25827cafe8d3c0dc8cfe60471b132a7cc752378d30751cbe1ad3d75536368a2c\""
+    },
+    "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3Bucket23D58BC4": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e\""
+    },
+    "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eS3VersionKey91944D80": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e\""
+    },
+    "AssetParameters9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1eArtifactHash3B4EBF6A": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"9b5f1b220d851c401252d9e740c601b74587ce28d1416387064d987ab33f7f1e\""
+    },
+    "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3BucketF29BD64D": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8\""
+    },
+    "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8S3VersionKey24940E5F": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8\""
+    },
+    "AssetParameters96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8ArtifactHash4D6FB621": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"96422537dac96f34ec0aae9782106538c14d6980caf881c630b621fb132a95a8\""
+    }
+  },
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

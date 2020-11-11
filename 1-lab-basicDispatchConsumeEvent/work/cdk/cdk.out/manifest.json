@@ -1,0 +1,469 @@
+{
+  "version": "6.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "Lab1-BasicDispatchConsume": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "Lab1-BasicDispatchConsume.template.json",
+        "tags": {
+          "Name": "Lab1-BasicDispatchConsume"
+        }
+      },
+      "metadata": {
+        "/Lab1-BasicDispatchConsume": [
+          {
+            "type": "aws:cdk:asset",
+            "data": {
+              "path": "asset.948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166",
+              "id": "948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166",
+              "packaging": "zip",
+              "sourceHash": "948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166",
+              "s3BucketParameter": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3Bucket9B4B3BFC",
+              "s3KeyParameter": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3VersionKeyC9AB5F85",
+              "artifactHashParameter": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166ArtifactHash8971AF24"
+            },
+            "trace": [
+              "ConstructNode.addMetadata (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/construct-compat.js:336:62)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:154:29)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          },
+          {
+            "type": "aws:cdk:asset",
+            "data": {
+              "path": "asset.b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3",
+              "id": "b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3",
+              "packaging": "zip",
+              "sourceHash": "b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3",
+              "s3BucketParameter": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3BucketEA0A3487",
+              "s3KeyParameter": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3VersionKey3539A61B",
+              "artifactHashParameter": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3ArtifactHashAAC60DC2"
+            },
+            "trace": [
+              "ConstructNode.addMetadata (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/construct-compat.js:336:62)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:154:29)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          },
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "Name",
+                "Value": "Lab1-BasicDispatchConsume"
+              }
+            ],
+            "trace": [
+              "ConstructNode.addMetadata (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/construct-compat.js:336:62)",
+              "Object.addStackArtifactToAssembly (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/_shared.js:22:20)",
+              "LegacyStackSynthesizer.emitStackArtifact (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/stack-synthesizer.js:28:19)",
+              "LegacyStackSynthesizer.synthesize (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:109:14)",
+              "construct (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:142:35)",
+              "visit (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:181:9)",
+              "visit (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:178:9)",
+              "synthesizeTree (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:136:5)",
+              "Object.synthesize (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:32:5)",
+              "App.synth (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stage.js:82:41)",
+              "_wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:51)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "ret._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:25)",
+              "Kernel._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3598:20)",
+              "Kernel.invoke (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2960:26)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdclambdarole50C0DE95",
+            "trace": [
+              "new Role (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-iam/lib/role.js:62:22)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdclambdaroleDefaultPolicyBFABEEDC",
+            "trace": [
+              "new Policy (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-iam/lib/policy.js:46:26)",
+              "Role.addToPrincipalPolicy (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-iam/lib/role.js:193:34)",
+              "Role.addToPolicy (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-iam/lib/role.js:203:21)",
+              "_wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:51)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "ret._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:25)",
+              "Kernel._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3598:20)",
+              "Kernel.invoke (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2960:26)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-eventbus/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdceventbus54F1F608",
+            "trace": [
+              "new EventBus (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-events/lib/event-bus.js:19:26)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-function-dispatch/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdcfunctiondispatch676CE67A",
+            "trace": [
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:115:26)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166/S3Bucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3Bucket9B4B3BFC",
+            "trace": [
+              "new FileAssetParameters (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/asset-parameters.js:12:36)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:144:22)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166/S3VersionKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3VersionKeyC9AB5F85",
+            "trace": [
+              "new FileAssetParameters (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/asset-parameters.js:16:35)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:144:22)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166/ArtifactHash": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166ArtifactHash8971AF24",
+            "trace": [
+              "new FileAssetParameters (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/asset-parameters.js:20:38)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:144:22)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3/S3Bucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3BucketEA0A3487",
+            "trace": [
+              "new FileAssetParameters (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/asset-parameters.js:12:36)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:144:22)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3/S3VersionKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3VersionKey3539A61B",
+            "trace": [
+              "new FileAssetParameters (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/asset-parameters.js:16:35)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:144:22)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3/ArtifactHash": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3ArtifactHashAAC60DC2",
+            "trace": [
+              "new FileAssetParameters (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/asset-parameters.js:20:38)",
+              "LegacyStackSynthesizer.doAddFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:144:22)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:72:25)",
+              "Stack.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack.js:363:33)",
+              "LegacyStackSynthesizer.addFileAsset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stack-synthesizers/legacy.js:76:31)",
+              "new Asset (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-s3-assets/lib/asset.js:40:44)",
+              "AssetCode.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/code.js:165:26)",
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:84:33)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-function-consume/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdcfunctionconsume8ECB7BC4",
+            "trace": [
+              "new Function (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function.js:115:26)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-function-consume/AllowEventRuleLab1BasicDispatchConsumelab1bdceventRuleFDB77673": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdcfunctionconsumeAllowEventRuleLab1BasicDispatchConsumelab1bdceventRuleFDB77673A708CEA9",
+            "trace": [
+              "Function.addPermission (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-lambda/lib/function-base.js:37:9)",
+              "Object.addLambdaPermission (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-events-targets/lib/util.js:30:17)",
+              "LambdaFunction.bind (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-events-targets/lib/lambda.js:21:16)",
+              "Rule.addTarget (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-events/lib/rule.js:79:36)",
+              "new Rule (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-events/lib/rule.js:47:18)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/lab1-bdc-eventRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lab1bdceventRule0945D749",
+            "trace": [
+              "new Rule (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/aws-events/lib/rule.js:30:26)",
+              "obj._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:49)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "Kernel._create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3137:26)",
+              "Kernel.create (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2881:21)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "new MetadataResource (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/metadata-resource.js:22:30)",
+              "construct (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:127:9)",
+              "visit (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:181:9)",
+              "visit (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:178:9)",
+              "injectMetadataResources (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:116:5)",
+              "Object.synthesize (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:16:5)",
+              "App.synth (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stage.js:82:41)",
+              "_wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:51)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "ret._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:25)",
+              "Kernel._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3598:20)",
+              "Kernel.invoke (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2960:26)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ],
+        "/Lab1-BasicDispatchConsume/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable",
+            "trace": [
+              "new MetadataResource (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/metadata-resource.js:30:35)",
+              "construct (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:127:9)",
+              "visit (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:181:9)",
+              "visit (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:178:9)",
+              "injectMetadataResources (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:116:5)",
+              "Object.synthesize (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/private/synthesis.js:16:5)",
+              "App.synth (/tmp/jsii-kernel-bxxWIM/node_modules/@aws-cdk/core/lib/stage.js:82:41)",
+              "_wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:51)",
+              "Kernel._wrapSandboxCode (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3621:16)",
+              "ret._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2961:25)",
+              "Kernel._ensureSync (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:3598:20)",
+              "Kernel.invoke (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:2960:26)",
+              "KernelHost.processRequest (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13088:28)",
+              "KernelHost.run (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13026:14)",
+              "Immediate.setImmediate [as _onImmediate] (/usr/local/lib/python3.7/site-packages/jsii/_embedded/jsii/jsii-runtime.js:13029:37)",
+              "runCallback (timers.js:705:18)",
+              "tryOnImmediate (timers.js:676:5)",
+              "processImmediate (timers.js:658:5)"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

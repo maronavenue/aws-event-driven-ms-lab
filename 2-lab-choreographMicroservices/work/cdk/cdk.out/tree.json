@@ -1,0 +1,1236 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree"
+      },
+      "Lab2-ChoreographyMicroservices": {
+        "id": "Lab2-ChoreographyMicroservices",
+        "path": "Lab2-ChoreographyMicroservices",
+        "children": {
+          "lab2-cm-ddb": {
+            "id": "lab2-cm-ddb",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-ddb",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-ddb/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "ID",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "ID",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    },
+                    "tableName": "lab2-cm-order-status",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ]
+                  }
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-ddb/ScalingRole"
+              }
+            }
+          },
+          "lab2-cm-eventbus": {
+            "id": "lab2-cm-eventbus",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-eventbus",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-eventbus/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::EventBus",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "lab2-cm-eventbus"
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-role": {
+            "id": "lab2-cm-role",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-role",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ]
+                  }
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-role/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-role/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "dynamodb:*",
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::GetAtt": [
+                                  "lab2cmddb4417587E",
+                                  "Arn"
+                                ]
+                              }
+                            },
+                            {
+                              "Action": "events:*",
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::GetAtt": [
+                                  "lab2cmeventbus60A26ED0",
+                                  "Arn"
+                                ]
+                              }
+                            },
+                            {
+                              "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "logs:DescribeLogStreams"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": [
+                                "xray:PutTraceSegments",
+                                "xray:PutTelemetryRecords"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "lab2cmroleDefaultPolicy3C850454",
+                        "roles": [
+                          {
+                            "Ref": "lab2cmroleBFF94AC7"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-invoiceService": {
+            "id": "lab2-cm-invoiceService",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-invoiceService",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-invoiceService/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-invoiceService/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-invoiceService/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-invoiceService/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2S3Bucket352D1F5A"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2S3VersionKey3282F41C"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2S3VersionKey3282F41C"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab2cmroleBFF94AC7",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "lab2cmddb4417587E"
+                        }
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              },
+              "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF": {
+                "id": "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-invoiceService/AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "lab2cminvoiceService47DB40AE",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "lab2cmeventRuleordercreated43F1B96A",
+                        "Arn"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "Lab2-ChoreographyMicroservices/AssetParameters",
+            "children": {
+              "53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2": {
+                "id": "53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2",
+                "path": "Lab2-ChoreographyMicroservices/AssetParameters/53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/53f73c2787100ff3a03de23a0b7cdae30f7a874b6ddd6404762a06f45dc5bef2/ArtifactHash"
+                  }
+                }
+              },
+              "a5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35": {
+                "id": "a5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35",
+                "path": "Lab2-ChoreographyMicroservices/AssetParameters/a5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/a5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/a5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/a5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35/ArtifactHash"
+                  }
+                }
+              },
+              "443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67": {
+                "id": "443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67",
+                "path": "Lab2-ChoreographyMicroservices/AssetParameters/443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67/ArtifactHash"
+                  }
+                }
+              },
+              "4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795b": {
+                "id": "4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795b",
+                "path": "Lab2-ChoreographyMicroservices/AssetParameters/4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795b",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795b/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795b/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795b/ArtifactHash"
+                  }
+                }
+              },
+              "faafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699c": {
+                "id": "faafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699c",
+                "path": "Lab2-ChoreographyMicroservices/AssetParameters/faafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699c",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/faafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699c/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/faafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699c/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab2-ChoreographyMicroservices/AssetParameters/faafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699c/ArtifactHash"
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-fulfilmentService": {
+            "id": "lab2-cm-fulfilmentService",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-fulfilmentService",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-fulfilmentService/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-fulfilmentService/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-fulfilmentService/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-fulfilmentService/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParametersa5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35S3BucketCF1163D0"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersa5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35S3VersionKey601F054D"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersa5c3294a21bac6231c851f38754c58eab590467af6b6563ee073a70e1bc8bd35S3VersionKey601F054D"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab2cmroleBFF94AC7",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "lab2cmddb4417587E"
+                        },
+                        "EVENTBUS_NAME": {
+                          "Ref": "lab2cmeventbus60A26ED0"
+                        }
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              },
+              "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF": {
+                "id": "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-fulfilmentService/AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "lab2cmfulfilmentService51EE32A3",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "lab2cmeventRuleordercreated43F1B96A",
+                        "Arn"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-forecastingService": {
+            "id": "lab2-cm-forecastingService",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-forecastingService",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-forecastingService/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-forecastingService/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-forecastingService/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-forecastingService/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67S3Bucket35AEDC31"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67S3VersionKey0007F6F9"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters443cfd21cab17d03401aec01e8b04c7c5a1be9a827459c5772f5f4f83a8e2e67S3VersionKey0007F6F9"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab2cmroleBFF94AC7",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "lab2cmddb4417587E"
+                        }
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              },
+              "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF": {
+                "id": "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-forecastingService/AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRuleordercreatedF74E62FF",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "lab2cmforecastingService8236ABA7",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "lab2cmeventRuleordercreated43F1B96A",
+                        "Arn"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-orderService": {
+            "id": "lab2-cm-orderService",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-orderService",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-orderService/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-orderService/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-orderService/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-orderService/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795bS3BucketB5939557"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795bS3VersionKeyE5E85F50"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters4c8ee8bc4d20023f3fd33ce9f0c38ca90bb95348d4fa8f16c59228df94c5795bS3VersionKeyE5E85F50"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab2cmroleBFF94AC7",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "lab2cmddb4417587E"
+                        },
+                        "EVENTBUS_NAME": {
+                          "Ref": "lab2cmeventbus60A26ED0"
+                        }
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-logisticService": {
+            "id": "lab2-cm-logisticService",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-logisticService",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-logisticService/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-logisticService/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-logisticService/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-logisticService/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParametersfaafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699cS3BucketE6C56D59"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersfaafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699cS3VersionKey25F5F98E"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersfaafcc08ab847dee456cabafd96f9beecea1b6354b16c2fe2e4361acee55699cS3VersionKey25F5F98E"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab2cmroleBFF94AC7",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "lab2cmddb4417587E"
+                        }
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ],
+                    "timeout": 30,
+                    "tracingConfig": {
+                      "mode": "Active"
+                    }
+                  }
+                }
+              },
+              "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRulefulfilmentcompleted19EE3502": {
+                "id": "AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRulefulfilmentcompleted19EE3502",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-logisticService/AllowEventRuleLab2ChoreographyMicroserviceslab2cmeventRulefulfilmentcompleted19EE3502",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "lab2cmlogisticService204B0B2C",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "lab2cmeventRulefulfilmentcompletedDEABAC29",
+                        "Arn"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-eventRule-order-created": {
+            "id": "lab2-cm-eventRule-order-created",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-eventRule-order-created",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-eventRule-order-created/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Order created event",
+                    "eventBusName": {
+                      "Ref": "lab2cmeventbus60A26ED0"
+                    },
+                    "eventPattern": {
+                      "detail-type": [
+                        "order_created"
+                      ]
+                    },
+                    "name": "lab2-OrderCreated",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "lab2cminvoiceService47DB40AE",
+                            "Arn"
+                          ]
+                        }
+                      },
+                      {
+                        "id": "Target1",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "lab2cmfulfilmentService51EE32A3",
+                            "Arn"
+                          ]
+                        }
+                      },
+                      {
+                        "id": "Target2",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "lab2cmforecastingService8236ABA7",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-eventRule-fulfilment-completed": {
+            "id": "lab2-cm-eventRule-fulfilment-completed",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-eventRule-fulfilment-completed",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-eventRule-fulfilment-completed/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Fulfilment completedevent",
+                    "eventBusName": {
+                      "Ref": "lab2cmeventbus60A26ED0"
+                    },
+                    "eventPattern": {
+                      "detail-type": [
+                        "fulfilment_completed"
+                      ]
+                    },
+                    "name": "lab2-FulfilmentCompleted",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "lab2cmlogisticService204B0B2C",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "lab2-cm-api-gateway": {
+            "id": "lab2-cm-api-gateway",
+            "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "lab2-cm-api-gateway",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab2-ChoreographyMicroservices"
+                      }
+                    ]
+                  }
+                }
+              },
+              "CloudWatchRole": {
+                "id": "CloudWatchRole",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/CloudWatchRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/CloudWatchRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "Lab2-ChoreographyMicroservices"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Account": {
+                "id": "Account",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Account",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Account",
+                  "aws:cdk:cloudformation:props": {
+                    "cloudWatchRoleArn": {
+                      "Fn::GetAtt": [
+                        "lab2cmapigatewayCloudWatchRole042B5539",
+                        "Arn"
+                      ]
+                    }
+                  }
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "lab2cmapigateway8838DBEC"
+                        },
+                        "description": "Automatically created by the RestApi construct"
+                      }
+                    }
+                  }
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "lab2cmapigateway8838DBEC"
+                        },
+                        "deploymentId": {
+                          "Ref": "lab2cmapigatewayDeploymentFEFB9124099a47a94a41bc30ccd59d2d2343e8a1"
+                        },
+                        "stageName": "prod",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "Lab2-ChoreographyMicroservices"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Endpoint"
+              },
+              "Default": {
+                "id": "Default",
+                "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default",
+                "children": {
+                  "order": {
+                    "id": "order",
+                    "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default/order",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default/order/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "lab2cmapigateway8838DBEC",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "order",
+                            "restApiId": {
+                              "Ref": "lab2cmapigateway8838DBEC"
+                            }
+                          }
+                        }
+                      },
+                      "GET": {
+                        "id": "GET",
+                        "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default/order/GET",
+                        "children": {
+                          "ApiPermission.Lab2ChoreographyMicroserviceslab2cmapigateway12B453B2.GET..order": {
+                            "id": "ApiPermission.Lab2ChoreographyMicroserviceslab2cmapigateway12B453B2.GET..order",
+                            "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default/order/GET/ApiPermission.Lab2ChoreographyMicroserviceslab2cmapigateway12B453B2.GET..order",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "lab2cmorderServiceEF2E69FA",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "lab2cmapigateway8838DBEC"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "lab2cmapigatewayDeploymentStageprod358CDAA9"
+                                      },
+                                      "/GET/order"
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "ApiPermission.Test.Lab2ChoreographyMicroserviceslab2cmapigateway12B453B2.GET..order": {
+                            "id": "ApiPermission.Test.Lab2ChoreographyMicroserviceslab2cmapigateway12B453B2.GET..order",
+                            "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default/order/GET/ApiPermission.Test.Lab2ChoreographyMicroserviceslab2cmapigateway12B453B2.GET..order",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "lab2cmorderServiceEF2E69FA",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "lab2cmapigateway8838DBEC"
+                                      },
+                                      "/test-invoke-stage/GET/order"
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "Lab2-ChoreographyMicroservices/lab2-cm-api-gateway/Default/order/GET/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "GET",
+                                "resourceId": {
+                                  "Ref": "lab2cmapigatewayorderE313F159"
+                                },
+                                "restApiId": {
+                                  "Ref": "lab2cmapigateway8838DBEC"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "lab2cmorderServiceEF2E69FA",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Lab2-ChoreographyMicroservices/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Lab2-ChoreographyMicroservices/CDKMetadata/Default"
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Lab2-ChoreographyMicroservices/CDKMetadata/Condition"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

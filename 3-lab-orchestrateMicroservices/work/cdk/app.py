@@ -65,21 +65,29 @@ class CdkStack(core.Stack):
             output_path="$.Payload"
         )
 
-        '''
-        [TASK] Create task and integrate with check address service
-        '''
+        task_check_address = _tasks.LambdaInvoke(
+            self,
+            "Check Address",
+            lambda_function=fn_lambda_check_address,
+            output_path="$.Payload"
+        )
 
-        '''
-        [TASK] Create task and integrate with approve/reject service
-        '''
+        task_wait_review = _tasks.LambdaInvoke(
+            self,
+            "Wait for Review",
+            lambda_function=fn_lambda_approve_reject,
+            output_path="$.Payload"
+        )
 
-        '''
-        [TASK] Create two states for approved and rejected. There states need to use Success type and named "Approve Application" and "Reject Application"
-        '''
+        state_approve = _sfn.Succeed(self, "Approve Application")
+        state_reject = _sfn.Succeed(self, "Reject Application")
 
-        '''
-        [TASK] Create a parallel for task_verify_identity and task_check_address
-        '''
+        # Let's define the State Machine, step by step
+        # First, paralell tasks for verification
+
+        s_verification = _sfn.Parallel(self, "Verification")
+        s_verification.branch(task_verify_identity)
+        s_verification.branch(task_check_address)
 
         # Next, we add a choice state
         c_human_review = _sfn.Choice(self, "Human review required?")
@@ -109,9 +117,11 @@ class CdkStack(core.Stack):
 
         definition = s_verification.next(c_human_review)
 
-        '''
-        [TASK] Create a state machine and use the definition and timeout of 5 mins. 
-        '''
+        _sfn.StateMachine(
+            self,
+            "lab3-statemachine",
+            definition=definition,
+            timeout=core.Duration.minutes(5))
 
 
 app = core.App()

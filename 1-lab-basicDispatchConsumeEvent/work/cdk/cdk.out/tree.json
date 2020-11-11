@@ -1,0 +1,401 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree"
+      },
+      "Lab1-BasicDispatchConsume": {
+        "id": "Lab1-BasicDispatchConsume",
+        "path": "Lab1-BasicDispatchConsume",
+        "children": {
+          "lab1-bdc-lambda-role": {
+            "id": "lab1-bdc-lambda-role",
+            "path": "Lab1-BasicDispatchConsume/lab1-bdc-lambda-role",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-lambda-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab1-BasicDispatchConsume"
+                      }
+                    ]
+                  }
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-lambda-role/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Lab1-BasicDispatchConsume/lab1-bdc-lambda-role/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "logs:DescribeLogStreams"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": "events:PutEvents",
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::GetAtt": [
+                                  "lab1bdceventbus54F1F608",
+                                  "Arn"
+                                ]
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "lab1bdclambdaroleDefaultPolicyBFABEEDC",
+                        "roles": [
+                          {
+                            "Ref": "lab1bdclambdarole50C0DE95"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab1-bdc-eventbus": {
+            "id": "lab1-bdc-eventbus",
+            "path": "Lab1-BasicDispatchConsume/lab1-bdc-eventbus",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-eventbus/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::EventBus",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "lab1-bdc-eventbus"
+                  }
+                }
+              }
+            }
+          },
+          "lab1-bdc-function-dispatch": {
+            "id": "lab1-bdc-function-dispatch",
+            "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-dispatch",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-dispatch/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-dispatch/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-dispatch/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-dispatch/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3Bucket9B4B3BFC"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3VersionKeyC9AB5F85"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166S3VersionKeyC9AB5F85"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab1bdclambdarole50C0DE95",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "environment": {
+                      "variables": {
+                        "EVENT_BUS_NAME": {
+                          "Ref": "lab1bdceventbus54F1F608"
+                        }
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab1-BasicDispatchConsume"
+                      }
+                    ],
+                    "timeout": 60
+                  }
+                }
+              }
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "Lab1-BasicDispatchConsume/AssetParameters",
+            "children": {
+              "948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166": {
+                "id": "948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166",
+                "path": "Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab1-BasicDispatchConsume/AssetParameters/948f536891280ff27b2ab42e2e7a5938978d2cb27dca31f04c897911499e4166/ArtifactHash"
+                  }
+                }
+              },
+              "b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3": {
+                "id": "b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3",
+                "path": "Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3/S3Bucket"
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3/S3VersionKey"
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "Lab1-BasicDispatchConsume/AssetParameters/b19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3/ArtifactHash"
+                  }
+                }
+              }
+            }
+          },
+          "lab1-bdc-function-consume": {
+            "id": "lab1-bdc-function-consume",
+            "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-consume",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-consume/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-consume/Code/Stage"
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-consume/Code/AssetBucket"
+                  }
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-consume/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3BucketEA0A3487"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3VersionKey3539A61B"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParametersb19f6312516260ce305518497a72ffe39e8b0f0a44783f6f6733ef4dedcd01d3S3VersionKey3539A61B"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "handler": "app.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lab1bdclambdarole50C0DE95",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "Lab1-BasicDispatchConsume"
+                      }
+                    ],
+                    "timeout": 60
+                  }
+                }
+              },
+              "AllowEventRuleLab1BasicDispatchConsumelab1bdceventRuleFDB77673": {
+                "id": "AllowEventRuleLab1BasicDispatchConsumelab1bdceventRuleFDB77673",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-function-consume/AllowEventRuleLab1BasicDispatchConsumelab1bdceventRuleFDB77673",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "lab1bdcfunctionconsume8ECB7BC4",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "lab1bdceventRule0945D749",
+                        "Arn"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lab1-bdc-eventRule": {
+            "id": "lab1-bdc-eventRule",
+            "path": "Lab1-BasicDispatchConsume/lab1-bdc-eventRule",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Lab1-BasicDispatchConsume/lab1-bdc-eventRule/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "A basic rule sample",
+                    "eventBusName": {
+                      "Ref": "lab1bdceventbus54F1F608"
+                    },
+                    "eventPattern": {
+                      "detail-type": [
+                        "message-received"
+                      ]
+                    },
+                    "name": "BDC-BasicDispatchConsume",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "lab1bdcfunctionconsume8ECB7BC4",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Lab1-BasicDispatchConsume/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Lab1-BasicDispatchConsume/CDKMetadata/Default"
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Lab1-BasicDispatchConsume/CDKMetadata/Condition"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
